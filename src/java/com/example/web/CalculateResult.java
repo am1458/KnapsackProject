@@ -86,6 +86,7 @@ public class CalculateResult  extends HttpServlet {
              
         // Array Variables Initialization
         //#######################################
+                
         eAHours[0] = Integer.parseInt(request.getParameter("stove"));
         eAHours[1] = Integer.parseInt(request.getParameter("oven"));
         eAHours[2] = Integer.parseInt(request.getParameter("vent"));
@@ -102,24 +103,7 @@ public class CalculateResult  extends HttpServlet {
         eAHours[13] = Integer.parseInt(request.getParameter("fridge"));
         eAHours[14] = Integer.parseInt(request.getParameter("airCondition"));
         eAHours[15] = Integer.parseInt(request.getParameter("radiator"));
-        for (int i = 0; i < eAHours.length; i++) {
-            if(eAHours[i] == 0) {
-                allZero++;
-            }
-        }
-        if(allZero == 16) {
-            out.print("<center>"
-                    + "<h1>"
-                    + "Ξαναδοκίμασε αφού δώσεις ώρες λειτουργίας για τουλάχιστον μία συσκευή!"
-                    + "</h1>"
-                    + "</center>");
-            out.print("<center>"
-                    + "<a style='text-decoration:none;' href='KnapsackIndex.jsp'>"
-                    + "Go Back"
-                    + "</a>"
-                    + "</center>");
-            return;
-        }
+                
         //#######################################
         eANames[0] = "Κουζίνα";
         eANames[1] = "Φούρνος";
@@ -313,7 +297,7 @@ public class CalculateResult  extends HttpServlet {
         out.print("Θα σου κοστίσουνε <b>" + totalCost + "</b> € <br>");  
         out.print("<br><br>");
         out.print("<a style='text-decoration:none;' href='KnapsackIndex.jsp'>Go Back</a>");
-        out.print("</center>"); 
+        out.print("</center>");
     }
     
     private double[] createFractionArray (double[] cost) {

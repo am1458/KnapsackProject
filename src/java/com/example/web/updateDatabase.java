@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class updateDatabase extends HttpServlet {
+    private static String DB = "jdbc:mysql://localhost:3306/www";
+    private static String DBUSER = "www";
+    private static String DBPSW = "123!@#";
     @Override
     public void doPost(HttpServletRequest request,
             HttpServletResponse response)
@@ -30,7 +33,7 @@ public class updateDatabase extends HttpServlet {
                
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/www", "www", "123!@#");
+            conn = DriverManager.getConnection(DB, DBUSER, DBPSW);
         } catch (ClassNotFoundException ex) {
             //Logger.getLogger(Authservlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -51,12 +54,13 @@ public class updateDatabase extends HttpServlet {
             boolean result = pstmt.execute();
             if (!result) { System.out.println("ERROR: Wrong Query"); }
             
-            RequestDispatcher view = request.getRequestDispatcher("listUsers.jsp");
-            view.forward(request, response);
+            response.sendRedirect("usersList.jsp");
         } catch (SQLException ex) {
             out.println("<html><body>Authetication not supported</body></html>");
         } catch (NullPointerException nex) {
             out.println("<html><body>NULL Pointer</body></html>");
-        } 
+        } catch (NumberFormatException nfe) {
+            out.println("<html><body>NULL Pointer</body></html>");
+        }
     }
 }
